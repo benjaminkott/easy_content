@@ -1,0 +1,24 @@
+{
+    "name": "bk2k/easy-content",
+    "type": "typo3-cms-extension",
+    "description": "",
+    "homepage": "https://github.com/benjaminkott/easy_content",
+    "authors": [
+      {
+        "name": "Benjamin Kott",
+        "email": "info@bk2k.info",
+        "role": "Developer",
+        "homepage": "http://www.bk2k.info/"
+      }
+    ],
+    "license": "MIT",
+    "keywords": ["TYPO3 CMS"],
+    "require": {
+        "typo3/cms-core": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "BK2K\\EasyContent\\": "Classes"
+        }
+    }
+}

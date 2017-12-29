@@ -1,0 +1,9 @@
+key: second_example
+name: Second Example
+description: A regular text element with header and bodytext fields.
+icon: somefile
+categories: text, common
+fields:
+  bodytext:
+    type: rte
+    name: Fancy Text
