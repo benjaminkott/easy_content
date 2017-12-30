@@ -1,2 +1,4 @@
 # Invalid Setup
-blubb: hallo
+identifier: Invalid identifier
+categories:
+    - invalid

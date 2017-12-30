@@ -11,23 +11,92 @@ namespace BK2K\EasyContent\Objects;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Validation;
 
 class ContentElement
 {
     /**
-     * @Assert\NotBlank()
      * @var string
      */
-    protected $configurationFile = null;
+    protected $configurationFile;
 
-    protected $identifier = null;
-    protected $name = null;
-    protected $description = null;
-    protected $icon = null;
-    protected $categories = [];
+    /**
+     * @var string
+     */
+    protected $identifier;
+
+    /**
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * @var string
+     */
+    protected $description;
+
+    /**
+     * @var string
+     */
+    protected $icon;
+
+    /**
+     * @var array
+     */
+    protected $categories = [
+        'common'
+    ];
+
+    /**
+     * @var array
+     */
     protected $fields = [];
-    protected $errors = [];
+
+    /**
+     * @var ConstraintViolationList
+     */
+    protected $violations;
+
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('configurationFile', new Assert\Type(['type' => 'string']));
+        $metadata->addPropertyConstraint('configurationFile', new Assert\NotBlank());
+
+        $metadata->addPropertyConstraint('identifier', new Assert\Type(['type' => 'string']));
+        $metadata->addPropertyConstraint('identifier', new Assert\NotBlank());
+        $metadata->addPropertyConstraint('identifier', new Assert\Length(['min' => 5]));
+        $metadata->addPropertyConstraint('identifier', new Assert\Regex([
+            'pattern' => "/^[a-z0-9_]+$/",
+            'message' => "Only lowercase letters, numbers and underscores are allowed."
+        ]));
+
+        $metadata->addPropertyConstraint('name', new Assert\Type(['type' => 'string']));
+        $metadata->addPropertyConstraint('name', new Assert\NotBlank());
+
+        $metadata->addPropertyConstraint('description', new Assert\Type(['type' => 'string']));
+
+        $metadata->addPropertyConstraint('icon', new Assert\Type(['type' => 'string']));
+        $metadata->addPropertyConstraint('icon', new Assert\NotBlank());
+
+        $metadata->addPropertyConstraint('categories', new Assert\Type(['type' => 'array']));
+        $metadata->addPropertyConstraint('categories', new Assert\Count(['min' => 1]));
+
+        $metadata->addPropertyConstraint('fields', new Assert\Type(['type' => 'array']));
+    }
+
+    public function validate()
+    {
+        $validator = Validation::createValidatorBuilder()
+            ->addMethodMapping('loadValidatorMetadata')
+            ->getValidator();
+        $this->violations = $validator->validate($this);
+    }
+
+    public function getViolations()
+    {
+        return $this->violations;
+    }
 
     public function setConfigurationFile($configurationFile)
     {
@@ -81,7 +150,7 @@ class ContentElement
 
     public function setCategories($categories)
     {
-        $this->categories = $categoriesArray;
+        $this->categories = $categories;
     }
 
     public function getCategories()
@@ -97,19 +166,5 @@ class ContentElement
     public function getFields()
     {
         return $this->fields;
-    }
-
-    public function addError($message)
-    {
-        $this->errors[] = $message;
-    }
-
-    public function getErrors() {
-        return $this->errors;
-    }
-
-    public function hasErrors()
-    {
-        return (count($this->errors) > 0) ? true : false;
     }
 }

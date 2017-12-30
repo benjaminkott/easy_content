@@ -19,58 +19,29 @@ class ContentElementRegistry implements SingletonInterface
     protected $elements = [];
     protected $failedElements = [];
 
-    public function registerElement($configurationFile = '')
+    public function registerElement($configurationFile)
     {
-        $contentElement = GeneralUtility::makeInstance(ContentElement::class);
+        $contentElement = new ContentElement();
         $contentElement->setConfigurationFile($configurationFile);
 
-        if (trim($configurationFile) === '') {
-            $contentElement->addError('Configuration file must be set.');
-        } else {
-            $absoluteConfigurationFile = GeneralUtility::getFileAbsFileName($configurationFile);
-            $configurationFileExists = true;
-            if (!file_exists(GeneralUtility::getFileAbsFileName($configurationFile))) {
-                $configurationFileExists = false;
-                $contentElement->addError('Configuration file does not exist.');
-            }
-        }
-
-
-        if ($configurationFileExists) {
-            $fileLoader = GeneralUtility::makeInstance(YamlFileLoader::class);
+        if (trim($configurationFile) !== '') {
             try {
+                $absoluteConfigurationFile = GeneralUtility::getFileAbsFileName($configurationFile);
+                $fileLoader = GeneralUtility::makeInstance(YamlFileLoader::class);
                 $configuration = $fileLoader->load($configurationFile);
+                $contentElement->setIdentifier(($configuration['identifier'] ?: ''));
+                $contentElement->setName(($configuration['name'] ?: $contentElement->getIdentifier()));
+                $contentElement->setDescription(($configuration['description'] ?: ''));
+                $contentElement->setIcon(($configuration['icon'] ?: ''));
+                $contentElement->setCategories(($configuration['categories'] ?: []));
+                $contentElement->setFields(($configuration['fields'] ?: []));
             } catch (\Exception $e) {
-                $contentElement->addError($e->getMessage());
+                // Catch exceptions, otherwise we cannot show validations
             }
         }
 
-        if (isset($configuration) && is_array($configuration)) {
-            try {
-                if (isset($configuration['identifier'])) {
-                    $contentElement->setIdentifier($configuration['identifier']);
-                }
-                if (isset($configuration['name'])) {
-                    $contentElement->setName($configuration['name']);
-                }
-                if (isset($configuration['description'])) {
-                    $contentElement->setDescription($configuration['description']);
-                }
-                if (isset($configuration['icon'])) {
-                    $contentElement->setIcon($configuration['icon']);
-                }
-                if (isset($configuration['categories'])) {
-                    $contentElement->setCategories(GeneralUtility::trimExplode(',', $configuration['categories']));
-                }
-                if (isset($configuration['fields'])) {
-                    $contentElement->setFields($configuration['fields']);
-                }
-            } catch (Exception $e) {
-                $contentElement->addError($e);
-            }
-        }
-
-        if ($contentElement->hasErrors()) {
+        $contentElement->validate();
+        if (count($contentElement->getViolations()) > 0) {
             $this->failedElements[] = $contentElement;
         } else {
             $this->elements[] = $contentElement;

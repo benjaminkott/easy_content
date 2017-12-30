@@ -2,4 +2,6 @@ identifier: first_example
 name: First Example
 description: A regular text element with header and bodytext fields.
 icon: somefile
-categories: text, common
+categories:
+    - text
+    - common

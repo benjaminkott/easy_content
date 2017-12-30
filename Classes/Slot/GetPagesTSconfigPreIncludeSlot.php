@@ -20,22 +20,25 @@ class GetPagesTSconfigPreIncludeSlot
         $contentElements = $contentElementRegistry->getElements();
 
         foreach ($contentElements as $contentElement) {
-            foreach ($contentElement->getCategories() as $category) {
-                $TSdataArray['defaultPageTSconfig'] .= '
-                    mod.wizards.newContentElement.wizardItems.' . $category . ' {
-                        elements {
-                            ' . $contentElement->getIdentifier() . ' {
-                                iconIdentifier = ' . $contentElement->getIcon() . '
-                                title = ' . $contentElement->getName() . '
-                                description = ' . $contentElement->getDescription() . '
-                                tt_content_defValues {
-                                    CType = ' . $contentElement->getIdentifier() . '
+            $categories = $contentElement->getCategories();
+            if (is_array($categories)) {
+                foreach ($contentElement->getCategories() as $category) {
+                    $TSdataArray['defaultPageTSconfig'] .= '
+                        mod.wizards.newContentElement.wizardItems.' . $category . ' {
+                            elements {
+                                ' . $contentElement->getIdentifier() . ' {
+                                    iconIdentifier = ' . $contentElement->getIcon() . '
+                                    title = ' . $contentElement->getName() . '
+                                    description = ' . $contentElement->getDescription() . '
+                                    tt_content_defValues {
+                                        CType = ' . $contentElement->getIdentifier() . '
+                                    }
                                 }
                             }
+                            show := addToList(' . $contentElement->getIdentifier() . ')
                         }
-                        show := addToList(' . $contentElement->getIdentifier() . ')
-                    }
-                ';
+                    ';
+                }
             }
         }
 

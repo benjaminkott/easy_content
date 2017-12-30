@@ -8,47 +8,50 @@
     <div class="card-container">
         <f:for each="{elements}" as="element">
             <div class="card card-size-medium">
+                <div class="card-header">
+                    {element.configurationFile}
+                </div>
                 <div class="card-content">
+                    <f:if condition="{element.violations}">
+                        <div class="alert alert-danger">
+                            <ul class="list-unstyled">
+                                <f:for each="{element.violations}" as="violation">
+                                    <li>
+                                        <strong>{violation.propertyPath}</strong>: {violation.message}
+                                    </li>
+                                </f:for>
+                            </ul>
+                        </div>
+                    </f:if>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <tr>
-                                <th width="100">Configuration File</th>
-                                <td>{element.configurationFile}</td>
-                            </tr>
-                            <tr>
-                                <th>Identifier</th>
+                                <th width="100">Identifier <code>[identifier]</code></th>
                                 <td>{element.identifier}</td>
                             </tr>
                             <tr>
-                                <th>Name</th>
+                                <th>Name <code>[name]</code></th>
                                 <td>{element.name}</td>
                             </tr>
                             <tr>
-                                <th>Description</th>
+                                <th>Description <code>[description]</code></th>
                                 <td>{element.description}</td>
                             </tr>
                             <tr>
-                                <th>Icon</th>
+                                <th>Icon <code>[icon]</code></th>
                                 <td>{element.icon}</td>
                             </tr>
                             <tr>
-                                <th>Categories</th>
+                                <th>Categories <code>[categories]</code></th>
                                 <td>
                                     <f:if condition="{element.categories}">
-                                        <ul>
-                                            <f:for each="{element.categories}" as="category">
-                                                <li>{category}</li>
-                                            </f:for>
-                                        </ul>
+                                        <f:for each="{element.categories}" as="category">
+                                            <span class="badge">{category}</span>
+                                        </f:for>
                                     </f:if>
                                 </td>
                             </tr>
                         </table>
-                        <f:for each="{element.errors}" as="error">
-                            <div class="alert alert-danger">
-                                {error}
-                            </div>
-                        </f:for>
                     </div>
                 </div>
             </div>
