@@ -12,13 +12,24 @@ namespace BK2K\EasyContent\Controller;
 use BK2K\EasyContent\Registry\ContentElementRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use TYPO3\CMS\Backend\View\BackendTemplateView;
 
 class ConfigurationController extends ActionController
 {
+    protected $defaultViewObjectName = BackendTemplateView::class;
+    protected $view;
+
+    protected function initializeView(ViewInterface $view)
+    {
+        parent::initializeView($view);
+        $this->view->getModuleTemplate()->setFlashMessageQueue($this->controllerContext->getFlashMessageQueue());
+    }
+
     public function showAction()
     {
         $contentElementRegistry = GeneralUtility::makeInstance(ContentElementRegistry::class);
-        $contentElements = $contentElementRegistry->getElements();
-        $this->view->assign('elements', $contentElements);
+        $this->view->assign('elements', $contentElementRegistry->getElements());
+        $this->view->assign('failedElements', $contentElementRegistry->getFailedElements());
     }
 }

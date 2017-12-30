@@ -1,1 +1,57 @@
-<f:debug>{elements}</f:debug>
+<h2>Errors</h2>
+<f:render section="List" arguments="{elements: failedElements}" />
+
+<h2>Content Elements</h2>
+<f:render section="List" arguments="{elements: elements}" />
+
+<f:section name="List">
+    <div class="card-container">
+        <f:for each="{elements}" as="element">
+            <div class="card card-size-medium">
+                <div class="card-content">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tr>
+                                <th width="100">Configuration File</th>
+                                <td>{element.configurationFile}</td>
+                            </tr>
+                            <tr>
+                                <th>Identifier</th>
+                                <td>{element.identifier}</td>
+                            </tr>
+                            <tr>
+                                <th>Name</th>
+                                <td>{element.name}</td>
+                            </tr>
+                            <tr>
+                                <th>Description</th>
+                                <td>{element.description}</td>
+                            </tr>
+                            <tr>
+                                <th>Icon</th>
+                                <td>{element.icon}</td>
+                            </tr>
+                            <tr>
+                                <th>Categories</th>
+                                <td>
+                                    <f:if condition="{element.categories}">
+                                        <ul>
+                                            <f:for each="{element.categories}" as="category">
+                                                <li>{category}</li>
+                                            </f:for>
+                                        </ul>
+                                    </f:if>
+                                </td>
+                            </tr>
+                        </table>
+                        <f:for each="{element.errors}" as="error">
+                            <div class="alert alert-danger">
+                                {error}
+                            </div>
+                        </f:for>
+                    </div>
+                </div>
+            </div>
+        </f:for>
+    </div>
+</f:section>

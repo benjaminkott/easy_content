@@ -23,9 +23,9 @@ class TypoScriptHook
         foreach ($contentElements as $contentElement) {
             ExtensionManagementUtility::addTypoScriptSetup(
                 '
-# Setting ' . $contentElement['key'] . ' Content Element TypoScript
-tt_content.' . $contentElement['key'] . ' =< lib.contentElement
-tt_content.' . $contentElement['key'] . ' {
+# Setting ' . $contentElement->getIdentifier() . ' Content Element TypoScript
+tt_content.' . $contentElement->getIdentifier() . ' =< lib.contentElement
+tt_content.' . $contentElement->getIdentifier() . ' {
     templateName = Generic
 }
                 '

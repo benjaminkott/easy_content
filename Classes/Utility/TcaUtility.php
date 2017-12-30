@@ -33,15 +33,15 @@ class TcaUtility
         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:extended,
     ';
 
-    public static function getTypeConfigurationForElement($configuration)
+    public static function getTypeConfigurationForElement($contentElement)
     {
         $data['tt_content']['columns']['CType']['config']['items'][] = [
-            $configuration['name'],
-            $configuration['key'],
-            $configuration['icon']
+            $contentElement->getName(),
+            $contentElement->getIdentifier(),
+            $contentElement->getIcon()
         ];
-        $data['tt_content']['ctrl']['typeicon_classes'][$configuration['key']] = $configuration['icon'];
-        $data['tt_content']['types'][$configuration['key']] = [
+        $data['tt_content']['ctrl']['typeicon_classes'][$contentElement->getIdentifier()] = $contentElement->getIcon();
+        $data['tt_content']['types'][$contentElement->getIdentifier()] = [
             'showitem' => self::SHOW_ITEM_BEFORE . '' . self::SHOW_ITEM_AFTER,
         ];
 

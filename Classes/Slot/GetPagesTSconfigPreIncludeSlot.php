@@ -20,20 +20,20 @@ class GetPagesTSconfigPreIncludeSlot
         $contentElements = $contentElementRegistry->getElements();
 
         foreach ($contentElements as $contentElement) {
-            foreach ($contentElement['categories'] as $category) {
+            foreach ($contentElement->getCategories() as $category) {
                 $TSdataArray['defaultPageTSconfig'] .= '
                     mod.wizards.newContentElement.wizardItems.' . $category . ' {
                         elements {
-                            ' . $contentElement['key'] . ' {
-                                iconIdentifier = ' . $contentElement['icon'] . '
-                                title = ' . $contentElement['name'] . '
-                                description = ' . $contentElement['description'] . '
+                            ' . $contentElement->getIdentifier() . ' {
+                                iconIdentifier = ' . $contentElement->getIcon() . '
+                                title = ' . $contentElement->getName() . '
+                                description = ' . $contentElement->getDescription() . '
                                 tt_content_defValues {
-                                    CType = ' . $contentElement['key'] . '
+                                    CType = ' . $contentElement->getIdentifier() . '
                                 }
                             }
                         }
-                        show := addToList(' . $contentElement['key'] . ')
+                        show := addToList(' . $contentElement->getIdentifier() . ')
                     }
                 ';
             }
