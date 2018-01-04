@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" product-name="easy-content">
+        <header/>
+        <body>
+            <trans-unit id="contentelement.firstexample.title">
+                <source>First Example</source>
+            </trans-unit>
+            <trans-unit id="contentelement.firstexample.description">
+                <source>Proin vel dui eu sem accumsan euismod ut ut elit. Donec non pretium nisi, vitae varius metus.</source>
+            </trans-unit>
+            <trans-unit id="wizard.easycontent">
+                <source>Easy Content</source>
+            </trans-unit>
+            <trans-unit id="wizard.locallang">
+                <source>Locallang</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

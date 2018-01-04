@@ -39,13 +39,13 @@ class ContentElement
     /**
      * @var string
      */
-    protected $icon;
+    protected $icon = 'easycontent-default';
 
     /**
      * @var array
      */
     protected $categories = [
-        'common'
+        ['key' => 'easycontent']
     ];
 
     /**
@@ -58,6 +58,9 @@ class ContentElement
      */
     protected $violations;
 
+    /**
+     * @var ClassMetadata
+     */
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata->addPropertyConstraint('configurationFile', new Assert\Type(['type' => 'string']));
@@ -81,6 +84,20 @@ class ContentElement
 
         $metadata->addPropertyConstraint('categories', new Assert\Type(['type' => 'array']));
         $metadata->addPropertyConstraint('categories', new Assert\Count(['min' => 1]));
+        $metadata->addPropertyConstraint('categories', new Assert\All([
+            new Assert\Collection([
+                'fields' => [
+                    'key' => [
+                        new Assert\NotBlank(),
+                        new Assert\Regex([
+                            'pattern' => "/^[a-z0-9_]+$/",
+                            'message' => "Only lowercase letters, numbers and underscores are allowed."
+                        ])
+                    ]
+                ],
+                'allowExtraFields' => true
+            ])
+        ]));
 
         $metadata->addPropertyConstraint('fields', new Assert\Type(['type' => 'array']));
     }

@@ -1,4 +1,5 @@
 # Invalid Setup
 identifier: Invalid identifier
 categories:
-    - invalid
+    - { label: 'invalid' }
+    - { key: 'invalid key' }

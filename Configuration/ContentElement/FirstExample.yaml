@@ -1,7 +1,8 @@
 identifier: first_example
-name: First Example
-description: A regular text element with header and bodytext fields.
-icon: somefile
+name: LLL:EXT:easy_content/Resources/Private/Language/locallang.xlf:contentelement.firstexample.title
+description: LLL:EXT:easy_content/Resources/Private/Language/locallang.xlf:contentelement.firstexample.description
+icon: EXT:easy_content/Resources/Public/Icons/ContentElements/firstexample.svg
 categories:
-    - text
-    - common
+    - { key: 'text' }
+    - { key: 'common' }
+    - { key: 'locallang', label: 'LLL:EXT:easy_content/Resources/Private/Language/locallang.xlf:wizard.locallang' }

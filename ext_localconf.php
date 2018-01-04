@@ -10,6 +10,16 @@
 defined('TYPO3_MODE') || die();
 
 /***************
+ * Register Icons
+ */
+$iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
+$iconRegistry->registerIcon(
+    'easycontent-default',
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:easy_content/Resources/Public/Icons/ContentElements/default.svg']
+);
+
+/***************
  * Register content elements
  */
 $contentElementRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\BK2K\EasyContent\Registry\ContentElementRegistry::class);
@@ -19,6 +29,7 @@ $contentElementRegistry->registerElement('EXT:easy_content/Configuration/Content
 $contentElementRegistry->registerElement('EXT:easy_content/Configuration/ContentElement/Minimal.yaml');
 $contentElementRegistry->registerElement('EXT:easy_content/Configuration/ContentElement/FirstExample.yaml');
 $contentElementRegistry->registerElement('EXT:easy_content/Configuration/ContentElement/SecondExample.yaml');
+$contentElementRegistry->registerElement('EXT:easy_content/Configuration/ContentElement/ThirdExample.yaml');
 
 /***************
  * Create dispatcher for signals

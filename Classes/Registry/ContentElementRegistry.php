@@ -32,8 +32,8 @@ class ContentElementRegistry implements SingletonInterface
                 $contentElement->setIdentifier(($configuration['identifier'] ?: ''));
                 $contentElement->setName(($configuration['name'] ?: $contentElement->getIdentifier()));
                 $contentElement->setDescription(($configuration['description'] ?: ''));
-                $contentElement->setIcon(($configuration['icon'] ?: ''));
-                $contentElement->setCategories(($configuration['categories'] ?: []));
+                $contentElement->setIcon(($configuration['icon'] ?: 'easycontent-default'));
+                $contentElement->setCategories(($configuration['categories'] ?: [['key' => 'easycontent']]));
                 $contentElement->setFields(($configuration['fields'] ?: []));
             } catch (\Exception $e) {
                 // Catch exceptions, otherwise we cannot show validations
