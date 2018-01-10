@@ -47,6 +47,16 @@ $signalSlotDispatcher->connect(
 );
 
 /***************
+ * Register slot to build sql for content elements
+ */
+$signalSlotDispatcher->connect(
+    \TYPO3\CMS\Install\Service\SqlExpectedSchemaService::class,
+    'tablesDefinitionIsBeingBuilt',
+    \BK2K\EasyContent\Slot\TablesDefinitionIsBeingBuiltSlot::class,
+    'registerContentElements'
+);
+
+/***************
  * Register slot to build PageTS for content elements
  */
 $signalSlotDispatcher->connect(

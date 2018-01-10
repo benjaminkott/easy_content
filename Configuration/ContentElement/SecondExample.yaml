@@ -8,6 +8,4 @@ categories:
     - { key: 'new' }
     - { key: 'super', label: 'Super Duper' }
 fields:
-  bodytext:
-    type: rte
-    name: Fancy Text
+    - { property: 'bodytext', label: 'Bodytext', type: 'rte' }
