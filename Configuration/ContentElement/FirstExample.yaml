@@ -1,8 +1,0 @@
-identifier: first_example
-name: LLL:EXT:easy_content/Resources/Private/Language/locallang.xlf:contentelement.firstexample.title
-description: LLL:EXT:easy_content/Resources/Private/Language/locallang.xlf:contentelement.firstexample.description
-icon: EXT:easy_content/Resources/Public/Icons/ContentElements/firstexample.svg
-categories:
-    - { key: 'text' }
-    - { key: 'common' }
-    - { key: 'locallang', label: 'LLL:EXT:easy_content/Resources/Private/Language/locallang.xlf:wizard.locallang' }

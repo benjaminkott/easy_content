@@ -1,5 +1,0 @@
-# Invalid Setup
-identifier: Invalid identifier
-categories:
-    - { label: 'invalid' }
-    - { key: 'invalid key' }

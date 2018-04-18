@@ -58,7 +58,7 @@ mod.wizards.newContentElement.wizardItems.' . $category['key'] . ' {
         $tmpTSdataArray = TypoScriptParser::checkIncludeLines_array($TSdataArray);
         $result = $tsConfigParser->parseTSconfig($tmpTSdataArray['defaultPageTSconfig'], 'PAGES');
         if (isset($result['TSconfig']['mod.']['wizards.']['newContentElement.']['wizardItems.'])) {
-            foreach($result['TSconfig']['mod.']['wizards.']['newContentElement.']['wizardItems.'] as $key => $category) {
+            foreach ($result['TSconfig']['mod.']['wizards.']['newContentElement.']['wizardItems.'] as $key => $category) {
                 if (!isset($category['header'])) {
                     $category = rtrim($key, '.');
                     $TSdataArray['defaultPageTSconfig'] .= '

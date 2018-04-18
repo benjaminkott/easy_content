@@ -1,6 +1,0 @@
-identifier: third_example
-name: Third Example
-description: Etiam vulputate dictum sagittis. Sed vestibulum ultrices eros vitae ornare. Proin elementum vel erat bibendum mollis.
-icon: EXT:easy_content/Resources/Public/Icons/ContentElements/thirdexample.png
-categories:
-    - { key: 'text' }

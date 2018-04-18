@@ -1,0 +1,12 @@
+typo3-easy-content:
+  identifier: disfunctional_example
+  description: Etiam vulputate dictum sagittis. Sed vestibulum ultrices eros vitae ornare. Proin elementum vel erat bibendum mollis.
+  icon: EXT:easy_content/Resources/Public/Icons/ContentElements/DisfunctinalExample.png
+  categories:
+    - { key: 'text' }
+  fields:
+    - { property: 'my_external_email', label: 'E-Mail', fcqn: 'MyNamespace\MyExtension\Fields\MySuperField' }
+    - { property: 'my_email', label: 'E-Mail', type: 'email' }
+    - { property: 'my_header', label: 'Headline', type: 'text' }
+    - { property: 'my_bodytext', label: 'Text', type: 'rte' }
+    - { property: 'my_links', label: 'Link to PDF files', type: 'link123', configuration: { allow: 'files', filter: 'pdf' } }

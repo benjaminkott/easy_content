@@ -1,4 +1,4 @@
-<h2>Errors</h2>
+<h2>Invalid content elements</h2>
 <f:render section="List" arguments="{elements: failedElements}" />
 
 <h2>Content Elements</h2>
@@ -13,7 +13,7 @@
                 </div>
                 <div class="card-content">
                     <f:if condition="{element.violations}">
-                        <div class="alert alert-danger">
+                        <f:be.infobox state="2">
                             <ul class="list-unstyled">
                                 <f:for each="{element.violations}" as="violation">
                                     <li>
@@ -21,7 +21,7 @@
                                     </li>
                                 </f:for>
                             </ul>
-                        </div>
+                        </f:be.infobox>
                     </f:if>
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -47,6 +47,74 @@
                                     <f:if condition="{element.categories}">
                                         <f:for each="{element.categories}" as="category">
                                             <span class="badge">{category.key}</span>
+                                        </f:for>
+                                    </f:if>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Fields <code>[fields]</code></th>
+                                <td>
+                                    <f:if condition="{element.fields}">
+                                        <f:for each="{element.fields}" as="field">
+                                            <div class="table-responsive">
+                                                <f:if condition="{field.violations}">
+                                                    <f:then>
+                                                        <f:variable name="trClass" value="danger" />
+                                                        <f:be.infobox state="2">
+                                                            <ul class="list-unstyled">
+                                                                <f:for each="{field.violations}" as="violation">
+                                                                    <li>
+                                                                        <strong>{violation.propertyPath}</strong>: {violation.message}
+                                                                    </li>
+                                                                </f:for>
+                                                            </ul>
+                                                        </f:be.infobox>
+                                                    </f:then>
+                                                    <f:else>
+                                                        <f:variable name="trClass" value="" />
+                                                    </f:else>
+                                                </f:if>
+                                                <table class="table table-striped">
+                                                    <tr class="{trClass}">
+                                                        <th width="100">Property <code>[property]</code></th>
+                                                        <td>{field.property}</td>
+                                                    </tr>
+                                                    <tr class="{trClass}">
+                                                        <th width="100">Label <code>[label]</code></th>
+                                                        <td>{field.label}</td>
+                                                    </tr>
+                                                    <tr class="{trClass}">
+                                                        <th width="100">Type <code>[type]</code></th>
+                                                        <td>{field.type}</td>
+                                                    </tr>
+                                                    <f:if condition="{field.validation}">
+                                                        <tr class="{trClass}">
+                                                            <th width="100">Validation <code>[validation]</code></th>
+                                                            <td>
+                                                                <ul class="list-unstyled">
+                                                                    <f:for each="{field.validation}" key="key" as="validation">
+                                                                        <li>{key}: {validation}</li>
+                                                                    </f:for>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                    </f:if>
+                                                    <f:if condition="{field.configuration}">
+                                                        <tr class="{trClass}">
+                                                            <th width="100">Configuration <code>[configuration]</code>
+                                                            </th>
+                                                            <td>
+                                                                <ul class="list-unstyled">
+                                                                    <f:for each="{field.configuration}" key="key" as="configuration">
+                                                                        <li>{key}: {configuration}</li>
+                                                                    </f:for>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                    </f:if>
+                                                </table>
+                                                <br>
+                                            </div>
                                         </f:for>
                                     </f:if>
                                 </td>

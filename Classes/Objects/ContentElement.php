@@ -9,32 +9,34 @@
 
 namespace BK2K\EasyContent\Objects;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use BK2K\EasyContent\Objects\Field\CommonField;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Validation;
+use TYPO3\CMS\Core\Resource\FileInterface;
 
 class ContentElement
 {
     /**
      * @var string
      */
-    protected $configurationFile;
+    protected $configurationFile = '';
 
     /**
      * @var string
      */
-    protected $identifier;
+    protected $identifier = '';
 
     /**
      * @var string
      */
-    protected $name;
+    protected $name = '';
 
     /**
      * @var string
      */
-    protected $description;
+    protected $description = '';
 
     /**
      * @var string
@@ -49,7 +51,7 @@ class ContentElement
     ];
 
     /**
-     * @var array
+     * @var FileInterface[]
      */
     protected $fields = [];
 
@@ -70,8 +72,8 @@ class ContentElement
         $metadata->addPropertyConstraint('identifier', new Assert\NotBlank());
         $metadata->addPropertyConstraint('identifier', new Assert\Length(['min' => 5]));
         $metadata->addPropertyConstraint('identifier', new Assert\Regex([
-            'pattern' => "/^[a-z0-9_]+$/",
-            'message' => "Only lowercase letters, numbers and underscores are allowed."
+            'pattern' => '/^[a-z0-9_]+$/',
+            'message' => 'Only lowercase letters, numbers and underscores are allowed.'
         ]));
 
         $metadata->addPropertyConstraint('name', new Assert\Type(['type' => 'string']));
@@ -90,8 +92,8 @@ class ContentElement
                     'key' => [
                         new Assert\NotBlank(),
                         new Assert\Regex([
-                            'pattern' => "/^[a-z0-9_]+$/",
-                            'message' => "Only lowercase letters, numbers and underscores are allowed."
+                            'pattern' => '/^[a-z0-9_]+$/',
+                            'message' => 'Only lowercase letters, numbers and underscores are allowed.'
                         ])
                     ]
                 ],
@@ -100,6 +102,8 @@ class ContentElement
         ]));
 
         $metadata->addPropertyConstraint('fields', new Assert\Type(['type' => 'array']));
+        $metadata->addPropertyConstraint('fields', new Assert\NotBlank());
+        $metadata->addPropertyConstraint('fields', new Assert\Valid());
     }
 
     public function validate()
@@ -115,73 +119,128 @@ class ContentElement
         return $this->violations;
     }
 
-    public function setConfigurationFile($configurationFile)
-    {
-        $this->configurationFile = $configurationFile;
-    }
-
-    public function getConfigurationFile()
+    /**
+     * @return string
+     */
+    public function getConfigurationFile(): string
     {
         return $this->configurationFile;
     }
 
-    public function setIdentifier($identifier)
+    /**
+     * @param string $configurationFile
+     */
+    public function setConfigurationFile(string $configurationFile): void
     {
-        $this->identifier = $identifier;
+        $this->configurationFile = $configurationFile;
     }
 
-    public function getIdentifier()
+    /**
+     * @return string
+     */
+    public function getIdentifier(): string
     {
         return $this->identifier;
     }
 
-    public function setName($name)
+    /**
+     * @param string $identifier
+     */
+    public function setIdentifier(string $identifier): void
     {
-        $this->name = $name;
+        $this->identifier = $identifier;
     }
 
-    public function getName()
+    /**
+     * @return string
+     */
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setDescription($description)
+    /**
+     * @param string $name
+     */
+    public function setName(string $name): void
     {
-        $this->description = $description;
+        $this->name = $name;
     }
 
-    public function getDescription()
+    /**
+     * @return string
+     */
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    public function setIcon($icon)
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description): void
     {
-        $this->icon = $icon;
+        $this->description = $description;
     }
 
-    public function getIcon()
+    /**
+     * @return string
+     */
+    public function getIcon(): string
     {
         return $this->icon;
     }
 
-    public function setCategories($categories)
+    /**
+     * @param string $icon
+     */
+    public function setIcon(string $icon): void
     {
-        $this->categories = $categories;
+        $this->icon = $icon;
     }
 
-    public function getCategories()
+    /**
+     * @return array
+     */
+    public function getCategories(): array
     {
         return $this->categories;
     }
 
-    public function setFields($fields)
+    /**
+     * @param array $categories
+     */
+    public function setCategories(array $categories): void
     {
-        $this->fields = $fields;
+        $this->categories = $categories;
     }
 
-    public function getFields()
+    /**
+     * @return CommonField[]
+     */
+    public function getFields(): array
     {
         return $this->fields;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFieldsAsPlainArray(): array
+    {
+        return array_map(
+            function (CommonField $field) {
+                return $field->getProperty();
+            },
+            $this->getFields()
+        );
+    }
+
+    /**
+     * @param FileInterface[] $fields
+     */
+    public function setFields(array $fields): void
+    {
+        $this->fields = $fields;
     }
 }

@@ -9,6 +9,7 @@
 
 namespace BK2K\EasyContent\Slot;
 
+use BK2K\EasyContent\Objects\ContentElement;
 use BK2K\EasyContent\Registry\ContentElementRegistry;
 use BK2K\EasyContent\Utility\TcaUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -20,6 +21,7 @@ class TcaIsBeingBuiltSlot
         $contentElementRegistry = GeneralUtility::makeInstance(ContentElementRegistry::class);
         $contentElements = $contentElementRegistry->getElements();
 
+        /** @var ContentElement $contentElement */
         foreach ($contentElements as $contentElement) {
             $typeConfiguration = TcaUtility::getTypeConfigurationForElement($contentElement);
             if ($typeConfiguration) {

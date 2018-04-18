@@ -26,7 +26,11 @@ class TypoScriptHook
 # Setting ' . $contentElement->getIdentifier() . ' Content Element TypoScript
 tt_content.' . $contentElement->getIdentifier() . ' =< lib.contentElement
 tt_content.' . $contentElement->getIdentifier() . ' {
-    templateName = Generic
+    templateRootPaths {
+        10 = EXT:easy_content/Resources/Private/Templates/ContentElements
+    }
+    templateName = ' . $contentElement->getIdentifier() . '
+    extbase.controllerExtensionName = EasyContent
 }
                 '
             );

@@ -9,55 +9,85 @@
 
 namespace BK2K\EasyContent\Registry;
 
+use BK2K\EasyContent\Error\ContentElementRegistrationFailedException;
+use BK2K\EasyContent\Factory\ContentElementFactory;
 use BK2K\EasyContent\Objects\ContentElement;
 use TYPO3\CMS\Core\Configuration\Loader\YamlFileLoader;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 class ContentElementRegistry implements SingletonInterface
 {
+    /**
+     * @var ObjectManager
+     */
+    protected $objectManager = null;
+
+    /**
+     * @var YamlFileLoader
+     */
+    protected $fileLoader = null;
+
+    /**
+     * @var array
+     */
     protected $elements = [];
+
+    /**
+     * @var array
+     */
     protected $failedElements = [];
 
-    public function registerElement($configurationFile)
+    /**
+     * @var ContentElementFactory
+     */
+    private $contentElementFactory;
+
+    public function __construct(
+        ObjectManager $objectManager = null,
+        ContentElementFactory $contentElementFactory = null
+    ) {
+        $this->objectManager = $objectManager ?: GeneralUtility::makeInstance(ObjectManager::class);
+        $this->contentElementFactory = $contentElementFactory ?: $this->objectManager->get(ContentElementFactory::class);
+    }
+
+    public function registerElements($path = PATH_site . 'typo3conf/ext/easy_content/Configuration/ContentElement/')
     {
-        $contentElement = new ContentElement();
-        $contentElement->setConfigurationFile($configurationFile);
-
-        if (trim($configurationFile) !== '') {
+        $configurationFiles = GeneralUtility::getAllFilesAndFoldersInPath([], $path, 'yaml,yml', false, 1);
+        foreach ($configurationFiles as $configurationFilePath) {
             try {
-                $absoluteConfigurationFile = GeneralUtility::getFileAbsFileName($configurationFile);
-                $fileLoader = GeneralUtility::makeInstance(YamlFileLoader::class);
-                $configuration = $fileLoader->load($configurationFile);
-                $contentElement->setIdentifier(($configuration['identifier'] ?: ''));
-                $contentElement->setName(($configuration['name'] ?: $contentElement->getIdentifier()));
-                $contentElement->setDescription(($configuration['description'] ?: ''));
-                $contentElement->setIcon(($configuration['icon'] ?: 'easycontent-default'));
-                $contentElement->setCategories(($configuration['categories'] ?: [['key' => 'easycontent']]));
-                $contentElement->setFields(($configuration['fields'] ?: []));
+                $contentElement = $this->contentElementFactory->create($configurationFilePath);
+                $contentElement->validate();
+                if ($contentElement->getViolations()->count() > 0) {
+                    $this->failedElements[] = $contentElement;
+                    throw new ContentElementRegistrationFailedException('Content element registration failed', 1523998213);
+                }
+                $this->elements[] = $contentElement;
             } catch (\Exception $e) {
-                // Catch exceptions, otherwise we cannot show validations
             }
-        }
-
-        $contentElement->validate();
-        if (count($contentElement->getViolations()) > 0) {
-            $this->failedElements[] = $contentElement;
-        } else {
-            $this->elements[] = $contentElement;
         }
     }
 
+    /**
+     * @return $contentElement[]
+     */
     public function getElements()
     {
         return $this->elements;
     }
 
+    /**
+     * @return $contentElement[]
+     */
     public function getFailedElements()
     {
         return $this->failedElements;
     }
 
+    /**
+     * @return $contentElement[]
+     */
     public function getAllElements()
     {
         return array_merge($this->failedElements, $this->elements);

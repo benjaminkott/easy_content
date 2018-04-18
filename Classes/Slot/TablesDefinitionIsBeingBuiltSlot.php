@@ -14,7 +14,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class TablesDefinitionIsBeingBuiltSlot
 {
-    function registerContentElements($sqlString)
+    public function registerContentElements($sqlString)
     {
         $contentElementRegistry = GeneralUtility::makeInstance(ContentElementRegistry::class);
         $contentElements = $contentElementRegistry->getElements();
