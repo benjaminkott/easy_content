@@ -1,13 +1,18 @@
 typo3-easy-content:
-  identifier: working_example
-  name: Working Example
-  description: Etiam vulputate dictum sagittis. Sed vestibulum ultrices eros vitae ornare. Proin elementum vel erat bibendum mollis.
+  identifier: gernot
+  name: Gernot
+  description: This contentelement is a test for different fields
   icon: EXT:easy_content/Resources/Public/Icons/ContentElements/WorkingExample.png
   categories:
     - { key: 'text' }
   fields:
-    - { property: 'easy_email', label: 'E-Mail', type: 'email' }
-    - { property: 'easy_header', label: 'Headline', type: 'text' }
-    - { property: 'bodytext', label: 'Text', type: 'rte' }
-    - { property: 'easy_bodytext', label: 'Text', type: 'rte' }
-    - { property: 'easy_links', label: 'Link to PDF files', type: 'link', configuration: { allow: 'files', filter: 'pdf' } }
+    - { property: 'easy_file', label: 'File', type: 'file' }
+    - { property: 'easy_media', label: 'Media', type: 'media' }
+    - { property: 'easy_multitext', label: 'Multiline text', type: 'textMultiline' }
+    - { property: 'easy_rte', label: 'Text', type: 'rte', configuration: { preset: 'MyRtePreset' } }
+    - { property: 'easy_linkpdf', label: 'Link to PDF files', type: 'link', configuration: [allow: 'files', filter: 'pdf'] }
+    - { property: 'easy_price', label: 'Price', type: 'currency', configuration: {unit: 'EUR'} }
+    - { property: 'easy_date', label: 'Date', type: 'date', configuration: [format: 'd.m.Y H:i'] }
+    - { property: 'easy_lightbox', label: 'open in Lightbox', type: 'toggle' }
+    - { property: 'easy_lightbox2', label: 'Lightbox', type: 'labeledToggle' }
+    - { property: 'easy_dynamic_table', label: 'My Table', type: 'table' }
