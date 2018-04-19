@@ -31,6 +31,9 @@ tt_content.' . $contentElement->getIdentifier() . ' {
     }
     templateName = ' . $contentElement->getIdentifier() . '
     extbase.controllerExtensionName = EasyContent
+    dataProcessing {
+        10 = BK2K\EasyContent\DataProcessing\EasyFieldsProcessor    
+    }
 }
                 '
             );
