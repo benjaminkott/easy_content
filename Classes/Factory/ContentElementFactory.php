@@ -11,7 +11,6 @@ namespace BK2K\EasyContent\Factory;
 
 use BK2K\EasyContent\Objects\ContentElement;
 use BK2K\EasyContent\Objects\Field\CommonField;
-use TYPO3\CMS\Core\Configuration\Loader\YamlFileLoader;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
@@ -23,33 +22,22 @@ class ContentElementFactory
     protected $objectManager = null;
 
     /**
-     * @var YamlFileLoader
-     */
-    protected $fileLoader = null;
-
-    /**
      * @var FieldFactory
      */
     private $fieldFactory;
 
     public function __construct(
         ObjectManager $objectManager = null,
-        YamlFileLoader $fileLoader = null,
         FieldFactory $fieldFactory = null
     ) {
         $this->objectManager = $objectManager ?: GeneralUtility::makeInstance(ObjectManager::class);
-        $this->fileLoader = $fileLoader ?: $this->objectManager->get(YamlFileLoader::class);
         $this->fieldFactory = $fieldFactory ?: $this->objectManager->get(FieldFactory::class);
     }
 
-    public function create($configurationFilePath): ContentElement
+    public function create(ContentElement $contentElement, array $configuration): ContentElement
     {
         try {
-            $contentElement = $this->objectManager->get(ContentElement::class);
-            $contentElement->setConfigurationFile($configurationFilePath);
-            $configuration = $this->fileLoader->load($configurationFilePath);
             $elementConfiguration = $configuration['typo3-easy-content'];
-
             $contentElement->setIdentifier(($elementConfiguration['identifier'] ?: ''));
             $contentElement->setName(($elementConfiguration['name'] ?: ''));
             $contentElement->setDescription(($elementConfiguration['description'] ?: ''));

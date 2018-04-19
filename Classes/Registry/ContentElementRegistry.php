@@ -46,18 +46,23 @@ class ContentElementRegistry implements SingletonInterface
 
     public function __construct(
         ObjectManager $objectManager = null,
+        YamlFileLoader $fileLoader = null,
         ContentElementFactory $contentElementFactory = null
     ) {
         $this->objectManager = $objectManager ?: GeneralUtility::makeInstance(ObjectManager::class);
+        $this->fileLoader = $fileLoader ?: $this->objectManager->get(YamlFileLoader::class);
         $this->contentElementFactory = $contentElementFactory ?: $this->objectManager->get(ContentElementFactory::class);
     }
 
     public function registerElements($path = PATH_site . 'typo3conf/ext/easy_content/Configuration/ContentElement/')
     {
-        $configurationFiles = GeneralUtility::getAllFilesAndFoldersInPath([], $path, 'yaml,yml', false, 1);
+        $configurationFiles = GeneralUtility::getAllFilesAndFoldersInPath([], $path, 'yaml,yml', false, 1, '^.');
         foreach ($configurationFiles as $configurationFilePath) {
             try {
-                $contentElement = $this->contentElementFactory->create($configurationFilePath);
+                $contentElement = $this->objectManager->get(ContentElement::class);
+                $contentElement->setConfigurationFile($configurationFilePath);
+                $configuration = $this->fileLoader->load($configurationFilePath);
+                $this->contentElementFactory->create($contentElement, $configuration);
                 $contentElement->validate();
                 if ($contentElement->getViolations()->count() > 0) {
                     $this->failedElements[] = $contentElement;
