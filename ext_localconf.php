@@ -65,3 +65,9 @@ $signalSlotDispatcher->connect(
  */
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['Core/TypoScript/TemplateService']['runThroughTemplatesPostProcessing'][] =
     \BK2K\EasyContent\Hooks\TypoScriptHook::class . '->registerContentElements';
+
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][\BK2K\EasyContent\Form\FormDataProvider\DatabaseRecordEasyContentAware::class] = [
+    'depends' => [
+        \TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseEditRow::class,
+    ]
+];

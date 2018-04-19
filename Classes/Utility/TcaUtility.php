@@ -37,7 +37,7 @@ class TcaUtility
         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:extended,
     ';
 
-    public static function getTypeConfigurationForElement(ContentElement $contentElement)
+    public static function getTypeConfigurationForElement(ContentElement $contentElement, array $tca)
     {
         $data['tt_content']['columns']['CType']['config']['items'][] = [
             $contentElement->getName(),
@@ -48,13 +48,17 @@ class TcaUtility
         /** @var FieldInterface|CommonField $field */
         foreach ($contentElement->getFields() as $field) {
             if ($field->getViolations()->count() === 0) {
+                // skip if field exists in tt_content
+                if (!empty($tca['tt_content']['columns'][$field->getProperty()])) {
+                    continue;
+                }
                 $data['tt_content']['columns'][$field->getProperty()] = $field->factorizeTca();
             }
         }
 
         $data['tt_content']['ctrl']['typeicon_classes'][$contentElement->getIdentifier()] = $contentElement->getIcon();
         $data['tt_content']['types'][$contentElement->getIdentifier()] = [
-            'showitem' => self::SHOW_ITEM_BEFORE . ' ' . implode(',', $contentElement->getFieldsAsPlainArray()) . ', ' . self::SHOW_ITEM_AFTER,
+            'showitem' => self::SHOW_ITEM_BEFORE . ' ' . implode(',', $contentElement->getFieldsAsPlainArray()) . ', easy_content, ' . self::SHOW_ITEM_AFTER,
         ];
 
         return $data;

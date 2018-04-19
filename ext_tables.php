@@ -20,8 +20,11 @@ if (TYPO3_MODE === 'BE') {
         ],
         [
             'access' => 'user,group',
-            'icon'   => 'EXT:easy_content/Resources/Public/Icons/module.svg',
+            'icon' => 'EXT:easy_content/Resources/Public/Icons/module.svg',
             'labels' => 'LLL:EXT:easy_content/Resources/Private/Language/locallang_easy_content.xlf',
         ]
     );
+
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['easy_content'] =
+        \BK2K\EasyContent\Hooks\DataHandlerEasyContentAwareHook::class;
 }

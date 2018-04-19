@@ -6,7 +6,8 @@ typo3-easy-content:
   categories:
     - { key: 'text' }
   fields:
-    - { property: 'my_email', label: 'E-Mail', type: 'email' }
-    - { property: 'my_header', label: 'Headline', type: 'text' }
-    - { property: 'my_bodytext', label: 'Text', type: 'rte' }
-    - { property: 'my_links', label: 'Link to PDF files', type: 'link', configuration: { allow: 'files', filter: 'pdf' } }
+    - { property: 'easy_email', label: 'E-Mail', type: 'email' }
+    - { property: 'easy_header', label: 'Headline', type: 'text' }
+    - { property: 'bodytext', label: 'Text', type: 'rte' }
+    - { property: 'easy_bodytext', label: 'Text', type: 'rte' }
+    - { property: 'easy_links', label: 'Link to PDF files', type: 'link', configuration: { allow: 'files', filter: 'pdf' } }

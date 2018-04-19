@@ -16,14 +16,14 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class TcaIsBeingBuiltSlot
 {
-    public function registerContentElements($tca)
+    public function registerContentElements(array $tca)
     {
         $contentElementRegistry = GeneralUtility::makeInstance(ContentElementRegistry::class);
         $contentElements = $contentElementRegistry->getElements();
 
         /** @var ContentElement $contentElement */
         foreach ($contentElements as $contentElement) {
-            $typeConfiguration = TcaUtility::getTypeConfigurationForElement($contentElement);
+            $typeConfiguration = TcaUtility::getTypeConfigurationForElement($contentElement, $tca);
             if ($typeConfiguration) {
                 $tca = array_merge_recursive($tca, $typeConfiguration);
             }
