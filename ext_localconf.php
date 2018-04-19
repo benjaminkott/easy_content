@@ -32,6 +32,8 @@ $contentElementRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
 );
 $contentElementRegistry->registerElements();
 
+$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['easy_content']['dataModifier'] = \BK2K\EasyContent\Registry\DataModifier\ExemplaricJsonModifier::class;
+
 /***************
  * Create dispatcher for signals
  */

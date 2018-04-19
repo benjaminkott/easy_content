@@ -9,33 +9,33 @@
 
 namespace BK2K\EasyContent\Form\FormDataProvider;
 
+use BK2K\EasyContent\Registry\DataModifier\DataModifierInterface;
+use BK2K\EasyContent\Registry\DataModifier\DataModifierResolver;
 use TYPO3\CMS\Backend\Form\FormDataProviderInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Determine the final TCA type value
- */
 class DatabaseRecordEasyContentAware implements FormDataProviderInterface
 {
+
     /**
-     * Add override values to the databaseRow fields. As those values are not meant to
-     * be overwritten by the user, the TCA of the field is set to type hidden.
-     *
+     * @var DataModifierInterface
+     */
+    private $dataModifier = null;
+
+    public function __construct(
+        DataModifierResolver $dataModifierResolver = null
+    ) {
+        $dataModifierResolver = $dataModifierResolver ?: GeneralUtility::makeInstance(DataModifierResolver::class);
+        $this->dataModifier = $dataModifierResolver->getModifier();
+    }
+
+    /**
      * @param array $result
      * @return array
      */
     public function addData(array $result)
     {
-        if ($result['databaseRow']['easy_content'] !== '') {
-            try {
-                $easyFields = \GuzzleHttp\json_decode($result['databaseRow']['easy_content']);
-                if (json_last_error() === JSON_ERROR_NONE) {
-                    foreach ($easyFields as $tcaFieldName => $value) {
-                        $result['databaseRow'][$tcaFieldName] = $value;
-                    }
-                }
-            } catch (\Exception $e) {
-            }
-        }
+        $result['databaseRow'] = $this->dataModifier->modifyBeforeBackendFormRendering($result['databaseRow']);
         return $result;
     }
 }

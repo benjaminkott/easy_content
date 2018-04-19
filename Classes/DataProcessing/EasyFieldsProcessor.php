@@ -9,11 +9,27 @@
 
 namespace BK2K\EasyContent\DataProcessing;
 
+use BK2K\EasyContent\Registry\DataModifier\DataModifierInterface;
+use BK2K\EasyContent\Registry\DataModifier\DataModifierResolver;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
 
 class EasyFieldsProcessor implements DataProcessorInterface
 {
+
+    /**
+     * @var DataModifierInterface
+     */
+    private $dataModifier = null;
+
+    public function __construct(
+        DataModifierResolver $dataModifierResolver = null
+    ) {
+        $dataModifierResolver = $dataModifierResolver ?: GeneralUtility::makeInstance(DataModifierResolver::class);
+        $this->dataModifier = $dataModifierResolver->getModifier();
+    }
+
     /**
      * Fetches records from the database as an array
      *
@@ -30,18 +46,7 @@ class EasyFieldsProcessor implements DataProcessorInterface
         array $processorConfiguration,
         array $processedData
     ) {
-        if ($processedData['data']['easy_content'] !== '') {
-            try {
-                $easyFields = \GuzzleHttp\json_decode($processedData['data']['easy_content']);
-                if (json_last_error() === JSON_ERROR_NONE) {
-                    foreach ($easyFields as $tcaFieldName => $value) {
-                        $processedData['data'][$tcaFieldName] = $value;
-                    }
-                    unset($processedData['data']['easy_content']);
-                }
-            } catch (\Exception $e) {
-            }
-        }
+        $processedData['data'] = $this->dataModifier->modifyBeforeFrontendOutput($processedData['data']);
         $targetVariableName = $cObj->stdWrapValue('as', $processorConfiguration, 'data');
         $processedData[$targetVariableName] = $processedData['data'];
         return $processedData;
