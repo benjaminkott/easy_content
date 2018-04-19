@@ -18,7 +18,7 @@ class FolderBasedYamlConfigurationProvider implements ConfigurationProviderInter
     /**
      * @var string
      */
-    protected $path = '';
+    protected $folderPath = '';
 
     /**
      * @var ObjectManager
@@ -31,18 +31,18 @@ class FolderBasedYamlConfigurationProvider implements ConfigurationProviderInter
     protected $fileLoader = null;
 
     public function __construct(
-        $path = '',
+        $folderPath = '',
         ObjectManager $objectManager = null,
         YamlFileLoader $fileLoader = null
     ) {
-        $this->path = $path;
+        $this->folderPath = $folderPath;
         $this->objectManager = $objectManager ?: GeneralUtility::makeInstance(ObjectManager::class);
         $this->fileLoader = $fileLoader ?: $this->objectManager->get(YamlFileLoader::class);
     }
 
     public function fetch(): array
     {
-        $configurationFiles = GeneralUtility::getAllFilesAndFoldersInPath([], $this->path, 'yaml,yml', false, 1, '^.');
+        $configurationFiles = GeneralUtility::getAllFilesAndFoldersInPath([], $this->folderPath, 'yaml,yml', false, 1, '^.');
         $configurationCollection = [];
         foreach ($configurationFiles as $configurationFilePath) {
             $configurationCollection[$configurationFilePath] = $this->fileLoader->load($configurationFilePath);

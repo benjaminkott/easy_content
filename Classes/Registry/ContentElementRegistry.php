@@ -29,12 +29,12 @@ class ContentElementRegistry implements SingletonInterface
     protected $configurationProvider = null;
 
     /**
-     * @var array
+     * @var $contentElement[]
      */
     protected $elements = [];
 
     /**
-     * @var array
+     * @var $contentElement[]
      */
     protected $failedElements = [];
 
@@ -68,6 +68,7 @@ class ContentElementRegistry implements SingletonInterface
                 }
                 $this->elements[] = $contentElement;
             } catch (\Exception $e) {
+                // fail silently
             }
         }
     }
