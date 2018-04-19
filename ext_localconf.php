@@ -22,7 +22,14 @@ $iconRegistry->registerIcon(
 /***************
  * Register content elements
  */
-$contentElementRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\BK2K\EasyContent\Registry\ContentElementRegistry::class);
+$folderBasedYamlConfigurationProvider = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+    \BK2K\EasyContent\Registry\FolderBasedYamlConfigurationProvider::class,
+    PATH_site . 'typo3conf/ext/easy_content/Configuration/ContentElement/'
+    );
+$contentElementRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+    \BK2K\EasyContent\Registry\ContentElementRegistry::class,
+    $folderBasedYamlConfigurationProvider
+);
 $contentElementRegistry->registerElements();
 
 /***************

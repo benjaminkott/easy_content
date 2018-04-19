@@ -12,7 +12,6 @@ namespace BK2K\EasyContent\Registry;
 use BK2K\EasyContent\Error\ContentElementRegistrationFailedException;
 use BK2K\EasyContent\Factory\ContentElementFactory;
 use BK2K\EasyContent\Objects\ContentElement;
-use TYPO3\CMS\Core\Configuration\Loader\YamlFileLoader;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -25,9 +24,9 @@ class ContentElementRegistry implements SingletonInterface
     protected $objectManager = null;
 
     /**
-     * @var YamlFileLoader
+     * @var ConfigurationProviderInterface
      */
-    protected $fileLoader = null;
+    protected $configurationProvider = null;
 
     /**
      * @var array
@@ -45,23 +44,22 @@ class ContentElementRegistry implements SingletonInterface
     private $contentElementFactory;
 
     public function __construct(
+        ConfigurationProviderInterface $configurationProvider = null,
         ObjectManager $objectManager = null,
-        YamlFileLoader $fileLoader = null,
         ContentElementFactory $contentElementFactory = null
     ) {
         $this->objectManager = $objectManager ?: GeneralUtility::makeInstance(ObjectManager::class);
-        $this->fileLoader = $fileLoader ?: $this->objectManager->get(YamlFileLoader::class);
+        $this->configurationProvider = $configurationProvider ?: $this->objectManager->get(ConfigurationProviderInterface::class);
         $this->contentElementFactory = $contentElementFactory ?: $this->objectManager->get(ContentElementFactory::class);
     }
 
-    public function registerElements($path = PATH_site . 'typo3conf/ext/easy_content/Configuration/ContentElement/')
+    public function registerElements()
     {
-        $configurationFiles = GeneralUtility::getAllFilesAndFoldersInPath([], $path, 'yaml,yml', false, 1, '^.');
-        foreach ($configurationFiles as $configurationFilePath) {
+        $configurationCollection = $this->configurationProvider->fetch();
+        foreach ($configurationCollection as $configurationKey => $configuration) {
             try {
                 $contentElement = $this->objectManager->get(ContentElement::class);
-                $contentElement->setConfigurationFile($configurationFilePath);
-                $configuration = $this->fileLoader->load($configurationFilePath);
+                $contentElement->setConfigurationFile($configurationKey);
                 $this->contentElementFactory->create($contentElement, $configuration);
                 $contentElement->validate();
                 if ($contentElement->getViolations()->count() > 0) {
