@@ -9,9 +9,10 @@
 
 namespace BK2K\EasyContent\Objects\Field;
 
+use BK2K\EasyContent\Objects\Field\Generic\CommonField;
 use BK2K\EasyContent\Objects\Field\Generic\FieldInterface;
 
-class Email extends Text implements FieldInterface
+class Toggle extends CommonField implements FieldInterface
 {
     public function factorizeTca(): array
     {
@@ -19,10 +20,8 @@ class Email extends Text implements FieldInterface
             'l10n_mode' => 'prefixLangTitle',
             'label' => $this->getLabel(),
             'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'max' => 255,
-                'eval '=> 'email'
+                'type' => 'check',
+                'renderType' => 'checkboxToggle',
             ],
         ];
         return $fieldTca;

@@ -11,7 +11,7 @@ namespace BK2K\EasyContent\Objects\Field;
 
 use BK2K\EasyContent\Objects\Field\Generic\FieldInterface;
 
-class Email extends Text implements FieldInterface
+class GeoCoordinate extends Text implements FieldInterface
 {
     public function factorizeTca(): array
     {
@@ -22,8 +22,6 @@ class Email extends Text implements FieldInterface
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
-                'eval '=> 'email'
-            ],
         ];
         return $fieldTca;
     }

@@ -11,7 +11,7 @@ namespace BK2K\EasyContent\Objects\Field;
 
 use BK2K\EasyContent\Objects\Field\Generic\FieldInterface;
 
-class Email extends Text implements FieldInterface
+class Number extends Text implements FieldInterface
 {
     public function factorizeTca(): array
     {
@@ -22,9 +22,25 @@ class Email extends Text implements FieldInterface
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
-                'eval '=> 'email'
+                'eval '=> 'int'
             ],
         ];
+
+        $configuration = $this->getConfiguration();
+        if ($configuration['eval'] === 'numeric') {
+            $fieldTca['config']['eval'] = 'num';
+        }
+        if ($configuration['eval'] === 'decimal') {
+            $fieldTca['config']['eval'] = 'double2';
+        }
+
+        if ($configuration['min']) {
+            $fieldTca['config']['range']['lower'] = $configuration['min'];
+        }
+        if ($configuration['max']) {
+            $fieldTca['config']['range']['upper'] = $configuration['max'];
+        }
+
         return $fieldTca;
     }
 }

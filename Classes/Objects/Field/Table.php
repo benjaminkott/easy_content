@@ -11,7 +11,7 @@ namespace BK2K\EasyContent\Objects\Field;
 
 use BK2K\EasyContent\Objects\Field\Generic\FieldInterface;
 
-class Email extends Text implements FieldInterface
+class Table extends Text implements FieldInterface
 {
     public function factorizeTca(): array
     {
@@ -19,10 +19,11 @@ class Email extends Text implements FieldInterface
             'l10n_mode' => 'prefixLangTitle',
             'label' => $this->getLabel(),
             'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'max' => 255,
-                'eval '=> 'email'
+                'type' => 'text',
+                'renderType' => 'textTable',
+                'wrap' => 'off',
+                'cols' => 80,
+                'rows' => 15,
             ],
         ];
         return $fieldTca;

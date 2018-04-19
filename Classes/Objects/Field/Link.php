@@ -35,12 +35,24 @@ class Link extends Text implements FieldInterface
         ];
 
         $configuration = $this->getConfiguration();
-        if ($configuration['allow'] === 'files') {
-            $fieldTca['config']['fieldControl']['linkPopup']['options']['blindLinkOptions'] = 'mail,spec,folder,page,url';
-        }
-        if ($configuration['filter'] === 'pdf') {
-            $fieldTca['config']['fieldControl']['linkPopup']['options']['allowedExtensions'] = 'pdf';
+        $fieldTca['config']['fieldControl']['linkPopup']['options']['blindLinkOptions'] = $this->generateDisallow($configuration['allow']);
+
+        if ($configuration['filter']) {
+            $fieldTca['config']['fieldControl']['linkPopup']['options']['allowedExtensions'] = $configuration['filter'];
         }
         return $fieldTca;
     }
+
+    private function generateDisallow($allow) {
+        // possible TCA default settings:
+        $possibleAllowed = ['files', 'mail', 'spec', 'folder', 'page', 'url'];
+
+        // explode and trim:
+        $allowConfig = array_map('trim', explode(',', $allow));
+
+        $disallowed = array_diff($possibleAllowed, $allowConfig);
+
+        return implode(',', $disallowed);
+    }
+
 }
