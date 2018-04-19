@@ -9,6 +9,9 @@
 
 namespace BK2K\EasyContent\Objects\Field;
 
+use BK2K\EasyContent\Objects\Field\Generic\CommonField;
+use BK2K\EasyContent\Objects\Field\Generic\FieldInterface;
+
 class Text extends CommonField implements FieldInterface
 {
     public function factorizeTca(): array

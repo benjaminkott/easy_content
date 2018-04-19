@@ -9,6 +9,8 @@
 
 namespace BK2K\EasyContent\Objects\Field;
 
+use BK2K\EasyContent\Objects\Field\Generic\FieldInterface;
+
 class Link extends Text implements FieldInterface
 {
     public function factorizeTca(): array

@@ -10,7 +10,7 @@
 namespace BK2K\EasyContent\Factory;
 
 use BK2K\EasyContent\Objects\ContentElement;
-use BK2K\EasyContent\Objects\Field\CommonField;
+use BK2K\EasyContent\Objects\Field\Generic\CommonField;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 

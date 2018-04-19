@@ -9,7 +9,7 @@
 
 namespace BK2K\EasyContent\Objects;
 
-use BK2K\EasyContent\Objects\Field\CommonField;
+use BK2K\EasyContent\Objects\Field\Generic\CommonField;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Mapping\ClassMetadata;

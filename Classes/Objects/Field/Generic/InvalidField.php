@@ -7,9 +7,12 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace BK2K\EasyContent\Objects\Field;
+namespace BK2K\EasyContent\Objects\Field\Generic;
 
-interface FieldInterface
+class InvalidField extends CommonField implements FieldInterface
 {
-    public function factorizeTca(): array;
+    public function factorizeTca(): array
+    {
+        return [];
+    }
 }

@@ -7,7 +7,7 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace BK2K\EasyContent\Objects\Field;
+namespace BK2K\EasyContent\Objects\Field\Generic;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ConstraintViolationList;

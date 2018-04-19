@@ -10,8 +10,8 @@
 namespace BK2K\EasyContent\Utility;
 
 use BK2K\EasyContent\Objects\ContentElement;
-use BK2K\EasyContent\Objects\Field\CommonField;
-use BK2K\EasyContent\Objects\Field\FieldInterface;
+use BK2K\EasyContent\Objects\Field\Generic\CommonField;
+use BK2K\EasyContent\Objects\Field\Generic\FieldInterface;
 
 class TcaUtility
 {
