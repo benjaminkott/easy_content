@@ -24,6 +24,6 @@ class DataHandlerEasyContentAwareHook
                 unset($fieldArray[$key]);
             }
         }
-        $fieldArray['easy_content'] = serialize($easyFields);
+        $fieldArray['easy_content'] = \GuzzleHttp\json_encode($easyFields);
     }
 }

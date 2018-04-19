@@ -21,13 +21,18 @@ class UnserializeViewHelper extends AbstractViewHelper
 
     public function render()
     {
-        $value = $this->arguments['value'];
-        if ($value === null) {
-            $value = $this->renderChildren();
-        }
-        $array = unserialize($value);
-        foreach ($array as $key => $value) {
-            $this->templateVariableContainer->add($key, $value);
+        try {
+            $value = $this->arguments['value'];
+            if ($value === null) {
+                $value = $this->renderChildren();
+            }
+            $array = \GuzzleHttp\json_decode($value);
+            if (json_last_error() === JSON_ERROR_NONE) {
+                foreach ($array as $key => $value) {
+                    $this->templateVariableContainer->add($key, $value);
+                }
+            }
+        } catch (\Exception $e) {
         }
     }
 }

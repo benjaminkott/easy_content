@@ -25,12 +25,16 @@ class DatabaseRecordEasyContentAware implements FormDataProviderInterface
      */
     public function addData(array $result)
     {
-        $easyFields = [];
         if ($result['databaseRow']['easy_content'] !== '') {
-            $easyFields = unserialize($result['databaseRow']['easy_content']);
-        }
-        foreach ($easyFields as $tcaFieldName => $value) {
-            $result['databaseRow'][$tcaFieldName] = $value;
+            try {
+                $easyFields = \GuzzleHttp\json_decode($result['databaseRow']['easy_content']);
+                if (json_last_error() === JSON_ERROR_NONE) {
+                    foreach ($easyFields as $tcaFieldName => $value) {
+                        $result['databaseRow'][$tcaFieldName] = $value;
+                    }
+                }
+            } catch (\Exception $e) {
+            }
         }
         return $result;
     }
