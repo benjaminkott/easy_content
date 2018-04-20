@@ -22,6 +22,7 @@ class GeoCoordinate extends Text implements FieldInterface
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
+            ]
         ];
         return $fieldTca;
     }
