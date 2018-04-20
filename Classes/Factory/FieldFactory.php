@@ -32,7 +32,7 @@ class FieldFactory
     public function create($fieldConfiguration)
     {
         try {
-            $fullyQualifiedClassName = $fieldConfiguration['fcqn'] ?: 'BK2K\\EasyContent\\Objects\Field\\' . ucfirst($fieldConfiguration['type']);
+            $fullyQualifiedClassName = $fieldConfiguration['fcqn'] ?: 'BK2K\\EasyContent\\Objects\Field\\' . ucfirst($fieldConfiguration['fieldType']);
             if (!class_exists($fullyQualifiedClassName)) {
                 throw new FieldRegistrationFailedException('Could not register field ' . $fullyQualifiedClassName, 1523998555);
             }
@@ -47,7 +47,7 @@ class FieldFactory
 
         $field->setProperty($fieldConfiguration['property']);
         $field->setLabel($fieldConfiguration['label']);
-        $field->setType($fieldConfiguration['fcqn'] ?: $fieldConfiguration['type']);
+        $field->setFieldType($fieldConfiguration['fcqn'] ?: $fieldConfiguration['fieldType']);
         $field->setValidation($fieldConfiguration['validation']);
         $field->setConfiguration($fieldConfiguration['configuration']);
         $field->validate();

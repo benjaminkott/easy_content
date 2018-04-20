@@ -35,7 +35,7 @@ class Link extends Text implements FieldInterface
         ];
 
         $configuration = $this->getConfiguration();
-        $fieldTca['config']['fieldControl']['linkPopup']['options']['blindLinkOptions'] = $this->generateDisallow($configuration['allow']);
+        // $fieldTca['config']['fieldControl']['linkPopup']['options']['blindLinkOptions'] = $this->generateDisallow($configuration['allow']);
 
         if ($configuration['filter']) {
             $fieldTca['config']['fieldControl']['linkPopup']['options']['allowedExtensions'] = $configuration['filter'];

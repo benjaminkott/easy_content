@@ -1,26 +1,11 @@
 typo3-easy-content:
-  identifier: working_example
-  name: Working Example
+  identifier: FullExample
+  name: Full Example
   description: Etiam vulputate dictum sagittis. Sed vestibulum ultrices eros vitae ornare. Proin elementum vel erat bibendum mollis.
   icon: EXT:easy_content/Resources/Public/Icons/ContentElements/WorkingExample.png
   categories:
     - { key: 'text' }
   fields:
-    - { property: 'easy_links', label: 'Link to PDF files', fieldType: 'link', configuration: { allow: 'files', filter: 'pdf' } }
-    - { property: 'easy_linkpdf', label: 'Link to PDF files', fieldType: 'link', configuration: { allow: 'files', filter: 'pdf' } }
-    - { property: 'easy_email', label: 'E-Mail', fieldType: 'email' }
-    - { property: 'easy_header', label: 'Headline', fieldType: 'text' }
-    - { property: 'bodytext', label: 'Text', fieldType: 'rte' }
-    - { property: 'easy_bodytext', label: 'Text', fieldType: 'rte' }
-    - { property: 'easy_file', label: 'File', fieldType: 'file' }
-    - { property: 'easy_media', label: 'Media', fieldType: 'media' }
-    - { property: 'easy_multitext', label: 'Multiline text', fieldType: 'textMultiline' }
-    - { property: 'easy_rte', label: 'Text', fieldType: 'rte', configuration: { preset: 'MyRtePreset' } }
-    - { property: 'easy_price', label: 'Price', fieldType: 'currency', configuration: {unit: 'EUR'} }
-    - { property: 'easy_date', label: 'Date', fieldType: 'date', configuration: [format: 'd.m.Y H:i'] }
-    - { property: 'easy_lightbox', label: 'open in Lightbox', fieldType: 'toggle' }
-    - { property: 'easy_lightbox2', label: 'Lightbox', fieldType: 'labeledToggle' }
-    - { property: 'easy_dynamic_table', label: 'My Table', fieldType: 'table' }
     - { property: 'easy_address', label: 'Address', fieldType: 'address' }
     - { property: 'easy_city', label: 'City', fieldType: 'city' }
     # - { property: 'easy_collection', label: 'Collection', fieldType: 'collection' }
@@ -47,4 +32,3 @@ typo3-easy-content:
     - { property: 'easy_text', label: 'Text', fieldType: 'text' }
     - { property: 'easy_text_multiline', label: 'TextMultiline', fieldType: 'textMultiline' }
     - { property: 'easy_toggle', label: 'Toggle', fieldType: 'toggle' }
-

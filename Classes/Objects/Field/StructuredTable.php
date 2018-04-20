@@ -20,7 +20,8 @@ class StructuredTable extends CommonField implements FieldInterface
             'l10n_mode' => 'prefixLangTitle',
             'label' => $this->getLabel(),
             'config' => [
-// TODO
+                'type' => 'text'
+                // TODO
             ],
         ];
         return $fieldTca;

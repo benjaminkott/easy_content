@@ -19,6 +19,7 @@ class Tca extends Text implements FieldInterface
             'l10n_mode' => 'prefixLangTitle',
             'label' => $this->getLabel(),
             'config' => [
+                'type' => 'text'
                 // TODO
             ],
         ];

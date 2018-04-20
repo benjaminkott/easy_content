@@ -6,7 +6,7 @@ typo3-easy-content:
     - { key: 'text' }
   fields:
     - { property: 'easy_external_email', label: 'E-Mail', fcqn: 'MyNamespace\MyExtension\Fields\MySuperField' }
-    - { property: 'easy_email', label: 'E-Mail', type: 'email' }
-    - { property: 'easy_header', label: 'Headline', type: 'text' }
-    - { property: 'easy_bodytext', label: 'Text', type: 'rte' }
-    - { property: 'easy_links', label: 'Link to PDF files', type: 'link123', configuration: { allow: 'files', filter: 'pdf' } }
+    - { property: 'easy_email', label: 'E-Mail', fieldType: 'email' }
+    - { property: 'easy_header', label: 'Headline', fieldType: 'text' }
+    - { property: 'easy_bodytext', label: 'Text', fieldType: 'rte' }
+    - { property: 'easy_links', label: 'Link to PDF files', fieldType: 'link123', configuration: { allow: 'files', filter: 'pdf' } }

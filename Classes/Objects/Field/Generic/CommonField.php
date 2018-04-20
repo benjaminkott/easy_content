@@ -18,7 +18,7 @@ class CommonField
 {
     protected $property = '';
     protected $label = '';
-    protected $type = '';
+    protected $fieldType = '';
     protected $validation = [];
     protected $configuration = [];
 
@@ -70,17 +70,17 @@ class CommonField
     /**
      * @return string
      */
-    public function getType(): string
+    public function getFieldType(): string
     {
-        return $this->type;
+        return $this->fieldType;
     }
 
     /**
-     * @param string $type
+     * @param string $fieldType
      */
-    public function setType(string $type): void
+    public function setFieldType(string $fieldType): void
     {
-        $this->type = $type;
+        $this->fieldType = $fieldType;
     }
 
     /**
@@ -154,8 +154,8 @@ class CommonField
         $metadata->addPropertyConstraint('label', new Assert\Type(['type' => 'string']));
         $metadata->addPropertyConstraint('label', new Assert\NotBlank());
 
-        $metadata->addPropertyConstraint('type', new Assert\Type(['type' => 'string']));
-        $metadata->addPropertyConstraint('type', new Assert\NotBlank());
+        $metadata->addPropertyConstraint('fieldType', new Assert\Type(['type' => 'string']));
+        $metadata->addPropertyConstraint('fieldType', new Assert\NotBlank());
 
         // @todo Refactor error handling for FieldRegistrationFailedException
         // (thrown in \BK2K\EasyContent\Factory\FieldFactory::create)

@@ -20,9 +20,23 @@ class OptionList extends CommonField implements FieldInterface
             'l10n_mode' => 'prefixLangTitle',
             'label' => $this->getLabel(),
             'config' => [
-// TODO
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [],
+                // TODO
             ],
         ];
+
+        $configuration = $this->getConfiguration();
+        $options = [];
+        foreach ((array)$configuration['options'] as $value => $label) {
+            $options[] = [
+                $label,
+                $value,
+            ];
+        }
+        $fieldTca['config']['items'] = $options;
+
         return $fieldTca;
     }
 }

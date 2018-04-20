@@ -72,8 +72,8 @@ class ContentElement
         $metadata->addPropertyConstraint('identifier', new Assert\NotBlank());
         $metadata->addPropertyConstraint('identifier', new Assert\Length(['min' => 5]));
         $metadata->addPropertyConstraint('identifier', new Assert\Regex([
-            'pattern' => '/^[a-z0-9_]+$/',
-            'message' => 'Only lowercase letters, numbers and underscores are allowed.'
+            'pattern' => '/^[A-Za-z0-9_-]+$/',
+            'message' => 'Only letters, numbers, dashes and underscores are allowed.'
         ]));
 
         $metadata->addPropertyConstraint('name', new Assert\Type(['type' => 'string']));

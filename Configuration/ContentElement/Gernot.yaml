@@ -6,13 +6,13 @@ typo3-easy-content:
   categories:
     - { key: 'text' }
   fields:
-    - { property: 'easy_file', label: 'File', type: 'file' }
-    - { property: 'easy_media', label: 'Media', type: 'media' }
-    - { property: 'easy_multitext', label: 'Multiline text', type: 'textMultiline' }
-    - { property: 'easy_rte', label: 'Text', type: 'rte', configuration: { preset: 'MyRtePreset' } }
-    - { property: 'easy_linkpdf', label: 'Link to PDF files', type: 'link', configuration: [allow: 'files', filter: 'pdf'] }
-    - { property: 'easy_price', label: 'Price', type: 'currency', configuration: {unit: 'EUR'} }
-    - { property: 'easy_date', label: 'Date', type: 'date', configuration: [format: 'd.m.Y H:i'] }
-    - { property: 'easy_lightbox', label: 'open in Lightbox', type: 'toggle' }
-    - { property: 'easy_lightbox2', label: 'Lightbox', type: 'labeledToggle' }
-    - { property: 'easy_dynamic_table', label: 'My Table', type: 'table' }
+    - { property: 'easy_file', label: 'File', fieldType: 'file' }
+    - { property: 'easy_media', label: 'Media', fieldType: 'media' }
+    - { property: 'easy_multitext', label: 'Multiline text', fieldType: 'textMultiline' }
+    - { property: 'easy_rte', label: 'Text', fieldType: 'rte', configuration: { preset: 'MyRtePreset' } }
+    - { property: 'easy_linkpdf', label: 'Link to PDF files', fieldType: 'link', configuration: [allow: 'files', filter: 'pdf'] }
+    - { property: 'easy_price', label: 'Price', fieldType: 'currency', configuration: {unit: 'EUR'} }
+    - { property: 'easy_date', label: 'Date', fieldType: 'date', configuration: [format: 'd.m.Y H:i'] }
+    - { property: 'easy_lightbox', label: 'open in Lightbox', fieldType: 'toggle' }
+    - { property: 'easy_lightbox2', label: 'Lightbox', fieldType: 'labeledToggle' }
+    - { property: 'easy_dynamic_table', label: 'My Table', fieldType: 'table' }
