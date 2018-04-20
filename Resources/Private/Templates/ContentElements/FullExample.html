@@ -1,0 +1,204 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:easyContent="http://typo3.org/ns/BK2K/EasyContent/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+
+    <h3>Address</h3>
+    <br>
+    {data.easy_address}
+
+
+
+    <hr>
+    <br>
+    <h3>City</h3>
+    <br>
+    {data.easy_city}
+
+
+
+    <hr>
+    <br>
+    <h3>Color</h3>
+    <br>
+    <div style="width: 50px; height: 50px; background: {data.easy_color}">
+
+    </div>
+    {data.easy_color}
+
+
+
+    <hr>
+    <br>
+    <h3>Currency</h3>
+    <br>
+    {data.easy_currency -> f:format.currency(decimalSeparator: ',', decimals: '2', currencySign: 'EUR ', prependCurrency: 1)}
+
+
+
+
+    <hr>
+    <br>
+    <h3>Date</h3>
+    <br>
+    {data.easy_date}
+
+
+
+    <hr>
+    <br>
+    <h3>Domain</h3>
+    <br>
+    <f:link.typolink parameter="{data.easy_domain}">{data.easy_domain}</f:link.typolink>
+
+
+
+    <hr>
+    <br>
+    <h3>E-Mail</h3>
+    <br>
+    <f:link.typolink parameter="mailto:{data.easy_email}">{data.easy_email}</f:link.typolink>
+
+
+
+    <hr>
+    <br>
+    <h3>File</h3>
+    <br>
+    {data.easy_file}
+
+
+
+    <hr>
+    <br>
+    <h3>GeoCoordinate</h3>
+    <br>
+    {data.easy_geo_coordinate}
+
+
+
+    <hr>
+    <br>
+    <h3>Header</h3>
+    <br>
+    {data.easy_header}
+
+
+
+    <hr>
+    <br>
+    <h3>Icon</h3>
+    <br>
+    {data.easy_icon}
+
+
+
+    <hr>
+    <br>
+    <h3>LabeledToggle</h3>
+    <br>
+    {data.easy_labeled_toggle}
+
+
+
+    <hr>
+    <br>
+    <h3>Link</h3>
+    <br>
+    <f:link.typolink parameter="{data.easy_link}">{data.easy_link}</f:link.typolink>
+
+
+
+    <hr>
+    <br>
+    <h3>Media</h3>
+    <br>
+    {data.easy_media}
+
+
+
+    <hr>
+    <br>
+    <h3>Number</h3>
+    <br>
+    {data.easy_number}
+
+
+
+    <hr>
+    <br>
+    <h3>OptionList</h3>
+    <br>
+    {data.easy_option_list}
+
+
+
+    <hr>
+    <br>
+    <h3>PostalCode</h3>
+    <br>
+    {data.easy_postal_code}
+
+
+
+    <hr>
+    <br>
+    <h3>Rte</h3>
+    <br>
+    {data.easy_rte -> f:format.html()}
+
+
+
+    <hr>
+    <br>
+    <h3>StructuredTable</h3>
+    <br>
+    {data.easy_structured_table}
+
+
+
+    <hr>
+    <br>
+    <h3>Table</h3>
+    <br>
+    {data.easy_table}
+
+
+
+    <hr>
+    <br>
+    <h3>Tca</h3>
+    <br>
+    {data.easy_tca}
+
+
+
+    <hr>
+    <br>
+    <h3>Telephone</h3>
+    <br>
+    {data.easy_telephone}
+
+
+
+    <hr>
+    <br>
+    <h3>Text</h3>
+    <br>
+    {data.easy_text}
+
+
+
+    <hr>
+    <br>
+    <h3>TextMultiline</h3>
+    <br>
+    {data.easy_text_multiline -> f:format.nl2br()}
+
+
+
+    <hr>
+    <br>
+    <h3>Toggle</h3>
+    <br>
+    {data.easy_toggle}

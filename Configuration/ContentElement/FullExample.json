@@ -1,0 +1,176 @@
+{
+  "typo3-easy-content": {
+    "identifier": "FullExample",
+    "name": "Full Example",
+    "description": "Etiam vulputate dictum sagittis. Sed vestibulum ultrices eros vitae ornare. Proin elementum vel erat bibendum mollis.",
+    "icon": "EXT:easy_content/Resources/Public/Icons/ContentElements/WorkingExample.png",
+    "categories": [
+      {
+        "key": "text"
+      }
+    ],
+    "fields": [
+      {
+        "property": "easy_address",
+        "label": "Address",
+        "fieldType": "address"
+      },
+      {
+        "property": "easy_address",
+        "label": "Address",
+        "fieldType": "address"
+      },
+      {
+        "property": "easy_city",
+        "label": "City",
+        "fieldType": "city"
+      },
+      {
+        "property": "easy_color",
+        "label": "Color",
+        "fieldType": "color"
+      },
+      {
+        "property": "easy_currency",
+        "label": "Currency",
+        "fieldType": "currency"
+      },
+      {
+        "property": "easy_date",
+        "label": "Date",
+        "fieldType": "date"
+      },
+      {
+        "property": "easy_domain",
+        "label": "Domain",
+        "fieldType": "domain"
+      },
+      {
+        "property": "easy_email",
+        "label": "LLL:EXT:some_extension/Resources",
+        "fieldType": "email"
+      },
+      {
+        "property": "easy_email",
+        "label": "E-mail",
+        "fieldType": "email"
+      },
+      {
+        "property": "easy_file",
+        "label": "File",
+        "fieldType": "file"
+      },
+      {
+        "property": "easy_geo_coordinate",
+        "label": "GeoCoordinate",
+        "fieldType": "geoCoordinate"
+      },
+      {
+        "property": "easy_header",
+        "label": "Header",
+        "fieldType": "header"
+      },
+      {
+        "property": "easy_icon",
+        "label": "Icon",
+        "fieldType": "icon"
+      },
+      {
+        "property": "easy_labeled_toggle",
+        "label": "LabeledToggle",
+        "fieldType": "labeledToggle"
+      },
+      {
+        "property": "easy_link",
+        "label": "Link",
+        "fieldType": "link"
+      },
+      {
+        "property": "easy_media",
+        "label": "Media",
+        "fieldType": "media"
+      },
+      {
+        "property": "easy_number",
+        "label": "Number",
+        "fieldType": "number"
+      },
+      {
+        "property": "easy_option_list",
+        "label": "OptionList",
+        "fieldType": "optionList"
+      },
+      {
+        "property": "easy_option_list",
+        "label": "OptionList",
+        "fieldType": "optionList",
+        "configuration": {
+          "options": {
+            "0": "My super option",
+            "1": "My uber option"
+          }
+        }
+      },
+      {
+        "property": "easy_postal_code",
+        "label": "PostalCode",
+        "fieldType": "postalCode"
+      },
+      {
+        "property": "easy_rte",
+        "label": "Rte",
+        "fieldType": "rte"
+      },
+      {
+        "property": "easy_rte",
+        "label": "Rte",
+        "fieldType": "rte",
+        "configuration": {
+          "options": {
+            "preset": "myRtePreset"
+          }
+        }
+      },
+      {
+        "property": "easy_structured_table",
+        "label": "StructuredTable",
+        "fieldType": "structuredTable",
+        "configuration": {
+          "options": {
+            "preset": "myRtePreset"
+          }
+        }
+      },
+      {
+        "property": "easy_table",
+        "label": "Table",
+        "fieldType": "table"
+      },
+      {
+        "property": "easy_tca",
+        "label": "Tca",
+        "fieldType": "tca"
+      },
+      {
+        "property": "easy_telephone",
+        "label": "Telephone",
+        "fieldType": "telephone"
+      },
+      {
+        "property": "easy_text",
+        "label": "Text",
+        "fieldType": "text"
+      },
+      {
+        "property": "easy_text_multiline",
+        "label": "TextMultiline",
+        "fieldType": "textMultiline"
+      },
+      {
+        "property": "easy_toggle",
+        "label": "Toggle",
+        "fieldType": "toggle"
+      }
+    ]
+  }
+}

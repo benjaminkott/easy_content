@@ -1,0 +1,183 @@
+{
+  "$id": "https://github.com/benjaminkott/easy_content/tree/master/Configuration/ContentElement/ContentElementSchema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "minProperties": 1,
+  "properties": {
+    "typo3-easy-content": {
+      "$id": "/properties/typo3-easy-content",
+      "type": "object",
+      "minProperties": 1,
+      "properties": {
+        "identifier": {
+          "$id": "/properties/typo3-easy-content/properties/identifier",
+          "type": "string",
+          "title": "Identifier of the Content Element",
+          "description": "An unique key. Allowed may be alphanumeric characters and underlines only",
+          "default": "",
+          "examples": [
+            "working_example",
+            "WorkingExample"
+          ],
+          "pattern": "^[A-Za-z0-9_ /:-]+$"
+        },
+        "name": {
+          "$id": "/properties/typo3-easy-content/properties/name",
+          "type": "string",
+          "title": "Name of the Content Element",
+          "description": "A short name for the element. It is (e.g.) visible for editors in the “New content element wizard” and the CType select box",
+          "default": "",
+          "examples": [
+            "Working Example"
+          ],
+          "pattern": "^[A-Za-z0-9_ /:-]+$"
+        },
+        "description": {
+          "$id": "/properties/typo3-easy-content/properties/description",
+          "type": "string",
+          "title": "Description of the Content Element",
+          "description": "Describes the element for editors in the “New content element wizard”. The name consists of a string or a reference to an entry in a localization file",
+          "default": "",
+          "examples": [
+            "Etiam vulputate dictum sagittis. Sed vestibulum ultrices eros vitae ornare. Proin elementum vel erat bibendum mollis"
+          ],
+          "pattern": "^[A-Za-z0-9_ /:-]+$"
+        },
+        "icon": {
+          "$id": "/properties/typo3-easy-content/properties/icon",
+          "type": "string",
+          "title": "Icon of the Content Element",
+          "description": "Identifier of an icon from the TYPO3 Icon registry or path to an image file",
+          "default": "",
+          "examples": [
+            "EXT:easy_content/Resources/Public/Icons/ContentElements/WorkingExample.png"
+          ],
+          "pattern": "^[A-Za-z0-9_ /:-]+$"
+        },
+        "categories": {
+          "$id": "/properties/typo3-easy-content/properties/categories",
+          "type": "array",
+          "title": "Categories of the Content Element",
+          "description": "One or more categories. Will be rendered into tabs in the “New content element wizard”",
+          "items": {
+            "$id": "/properties/typo3-easy-content/properties/categories/items",
+            "type": "object",
+            "properties": {
+              "key": {
+                "$id": "/properties/typo3-easy-content/properties/categories/items/properties/key",
+                "type": "string",
+                "title": "Key",
+                "default": "",
+                "examples": [
+                  "text"
+                ],
+                "pattern": "^[A-Za-z0-9_ /:-]+$"
+              }
+            }
+          }
+        },
+        "fields": {
+          "$id": "/properties/typo3-easy-content/properties/fields",
+          "type": "array",
+          "description": "Deepest structure-level of the field definition",
+          "items": {
+            "$id": "/properties/typo3-easy-content/properties/fields/items",
+            "type": "object",
+            "properties": {
+              "property": {
+                "$id": "/properties/typo3-easy-content/properties/fields/items/properties/property",
+                "type": "string",
+                "description": "An unique key in the particular element. Allowed may be lowercase characters and underline only",
+                "title": "Property name of a field",
+                "default": "",
+                "examples": [
+                  "easy_email"
+                ],
+                "pattern": "^[a-z_]+$"
+              },
+              "label": {
+                "$id": "/properties/typo3-easy-content/properties/fields/items/properties/label",
+                "type": "string",
+                "title": "Label of a field",
+                "description": "A short name for the field",
+                "default": "",
+                "examples": [
+                  "E-Mail"
+                ],
+                "pattern": "^[A-Za-z0-9_ /:-]+$"
+              },
+              "fieldType": {
+                "$id": "/properties/typo3-easy-content/properties/fields/items/properties/fieldType",
+                "type": "string",
+                "title": "Type of a field",
+                "default": "Defines the type of an element",
+                "examples": [
+                  "email"
+                ],
+                "pattern": "^[A-Za-z0-9_]+$"
+              },
+              "fcqn": {
+                "$id": "/properties/typo3-easy-content/properties/fields/items/properties/fcqn",
+                "type": "string",
+                "title": "Class name for a field",
+                "default": "Defines the fcqn/type of an element",
+                "examples": [
+                  "BK2K\\EasyContent\\Objects\\Field\\MySuperField"
+                ],
+                "pattern": "^[A-Za-z0-9\\\\]+$"
+              },
+              "configuration": {
+                "$id": "/properties/typo3-easy-content/properties/fields/items/properties/configuration",
+                "type": "object",
+                "title": "Configuration for a field",
+                "description": "Each fieldType can have his special configuration options",
+                "properties": {
+                  "options": {
+                    "$id": "/properties/typo3-easy-content/properties/fields/items/properties/configuration/properties/options",
+                    "type": "object",
+                    "minProperties": 1,
+                    "patternProperties": {
+                      ".*": {
+                        "$id": "/properties/typo3-easy-content/properties/fields/items/properties/configuration/properties/options/properties/0",
+                        "type": "string",
+                        "title": "An option",
+                        "default": "",
+                        "examples": [
+                          "My super option"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "required": [
+              "property",
+              "label"
+            ],
+            "oneOf": [
+              {
+                "required": [
+                  "fieldType"
+                ]
+              },
+              {
+                "required": [
+                  "fcqn"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "identifier",
+        "name",
+        "description",
+        "icon",
+        "categories",
+        "fields"
+      ]
+    }
+  }
+}

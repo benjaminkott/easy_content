@@ -1,0 +1,49 @@
+{
+  "typo3-easy-content": {
+    "identifier": "working_example",
+    "name": "Working Example",
+    "description": "Etiam vulputate dictum sagittis. Sed vestibulum ultrices eros vitae ornare. Proin elementum vel erat bibendum mollis.",
+    "icon": "EXT:easy_content/Resources/Public/Icons/ContentElements/WorkingExample.png",
+    "categories": [
+      {
+        "key": "text"
+      }
+    ],
+    "fields": [
+      {
+        "property": "easy_email",
+        "label": "E-Mail",
+        "fieldType": "email"
+      },
+      {
+        "property": "easy_email",
+        "label": "E-Mail",
+        "fcqn": "BK2K\\EasyContent\\Objects\Field\\MySuperField"
+      },
+      {
+        "property": "easy_header",
+        "label": "Headline",
+        "fieldType": "text"
+      },
+      {
+        "property": "bodytext",
+        "label": "Text",
+        "fieldType": "rte"
+      },
+      {
+        "property": "easy_bodytext",
+        "label": "Text",
+        "fieldType": "rte"
+      },
+      {
+        "property": "easy_links",
+        "label": "Link to PDF files",
+        "fieldType": "link",
+        "configuration": {
+          "allow": "files",
+          "filter": "pdf"
+        }
+      }
+    ]
+  }
+}
