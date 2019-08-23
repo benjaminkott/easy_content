@@ -1,3 +1,4 @@
-vendor/*
+.build/
+.ddev/commands/
 composer.lock
 .php_cs.cache

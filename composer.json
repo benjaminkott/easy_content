@@ -1,25 +1,66 @@
 {
-    "name": "bk2k/easy-content",
-    "type": "typo3-cms-extension",
-    "description": "",
-    "homepage": "https://github.com/benjaminkott/easy_content",
-    "authors": [
-      {
-        "name": "Benjamin Kott",
-        "email": "info@bk2k.info",
-        "role": "Developer",
-        "homepage": "http://www.bk2k.info/"
-      }
-    ],
-    "license": "MIT",
-    "keywords": ["TYPO3 CMS"],
-    "require": {
-        "typo3/cms-core": "^9.0",
-        "symfony/validator": "^4.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "BK2K\\EasyContent\\": "Classes"
-        }
+  "name": "bk2k/easy-content",
+  "type": "typo3-cms-extension",
+  "description": "",
+  "homepage": "https://github.com/benjaminkott/easy_content",
+  "authors": [
+    {
+      "name": "Benjamin Kott",
+      "email": "info@bk2k.info",
+      "role": "Developer",
+      "homepage": "http://www.bk2k.info/"
     }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "TYPO3 CMS"
+  ],
+  "require": {
+    "typo3/cms-backend": "^9.5",
+    "typo3/cms-core": "^9.5",
+    "typo3/cms-extbase": "^9.5",
+    "typo3/cms-extensionmanager": "^9.5",
+    "typo3/cms-fluid": "^9.5",
+    "typo3/cms-frontend": "^9.5",
+    "typo3/cms-install": "^9.5",
+    "symfony/validator": "^4.3"
+  },
+  "require-dev": {
+    "typo3/cms-belog": "^9.5",
+    "typo3/cms-lowlevel": "^9.5",
+    "typo3/cms-tstemplate": "^9.5",
+    "friendsofphp/php-cs-fixer": "^2.15.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "BK2K\\EasyContent\\": "Classes"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "BK2K\\EasyContent\\Tests\\": "Tests"
+    }
+  },
+  "config": {
+    "bin-dir": ".build/bin",
+    "discard-changes": true,
+    "optimize-autoloader": true,
+    "vendor-dir": ".build/vendor"
+  },
+  "scripts": {
+    "cgl": [
+      "php-cs-fixer fix"
+    ],
+    "post-autoload-dump": [
+      "mkdir -p .build/public/typo3conf/ext/",
+      "[ -L .build/public/typo3conf/ext/easy_content ] || ln -snvf ../../../../. .build/public/typo3conf/ext/easy_content"
+    ]
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "easy_content",
+      "web-dir": ".build/public",
+      "app-dir": ".build"
+    }
+  }
 }
