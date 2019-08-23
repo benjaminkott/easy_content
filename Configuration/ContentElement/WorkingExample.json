@@ -18,7 +18,7 @@
       {
         "property": "easy_email",
         "label": "E-Mail",
-        "fcqn": "BK2K\\EasyContent\\Objects\Field\\MySuperField"
+        "fcqn": "BK2K\\EasyContent\\Objects\\Field\\MySuperField"
       },
       {
         "property": "easy_header",
