@@ -43,7 +43,8 @@ class Link extends Text implements FieldInterface
         return $fieldTca;
     }
 
-    private function generateDisallow($allow) {
+    private function generateDisallow($allow)
+    {
         // possible TCA default settings:
         $possibleAllowed = ['files', 'mail', 'spec', 'folder', 'page', 'url'];
 
@@ -54,5 +55,4 @@ class Link extends Text implements FieldInterface
 
         return implode(',', $disallowed);
     }
-
 }
