@@ -1,0 +1,5 @@
+{
+    "yaml.schemas": {
+        "Configuration/Schema/ContentElementSchema.json": "/block.*.yaml",
+    }
+}
